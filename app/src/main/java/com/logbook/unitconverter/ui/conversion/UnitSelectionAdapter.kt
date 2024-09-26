@@ -10,7 +10,7 @@ import com.logbook.unitconverter.databinding.SpinnerItemBinding
 
 class UnitSelectionAdapter(
     context: Context,
-    private val objects: Array<String>,
+    objects: Array<String>,
     private var fontSize: Float
 ) : ArrayAdapter<String>(context, R.layout.spinner_item, objects) {
 
@@ -25,11 +25,10 @@ class UnitSelectionAdapter(
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return try {
-            val binding: SpinnerItemBinding
-            if (convertView == null) {
-                binding = SpinnerItemBinding.inflate(LayoutInflater.from(context), parent, false)
+            val binding: SpinnerItemBinding = if (convertView == null) {
+                SpinnerItemBinding.inflate(LayoutInflater.from(context), parent, false)
             } else {
-                binding = SpinnerItemBinding.bind(convertView)
+                SpinnerItemBinding.bind(convertView)
             }
 
             binding.spinnerItemText.text = getItem(position)
@@ -44,11 +43,10 @@ class UnitSelectionAdapter(
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         return try {
-            val binding: SpinnerItemBinding
-            if (convertView == null) {
-                binding = SpinnerItemBinding.inflate(LayoutInflater.from(context), parent, false)
+            val binding: SpinnerItemBinding = if (convertView == null) {
+                SpinnerItemBinding.inflate(LayoutInflater.from(context), parent, false)
             } else {
-                binding = SpinnerItemBinding.bind(convertView)
+                SpinnerItemBinding.bind(convertView)
             }
 
             binding.spinnerItemText.text = getItem(position)

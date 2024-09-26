@@ -26,7 +26,7 @@ class ConversionFragment : Fragment(), FontSizeAware {
     private var _binding: FragmentConversionBinding? = null
     private val binding get() = _binding!!
 
-    private var fontSize: Float = 16f // Default font size
+    private var fontSize: Float = 16f
 
     private val viewModel: ConversionViewModel by viewModels()
     private lateinit var conversionResultAdapter: ConversionResultAdapter
@@ -91,7 +91,7 @@ class ConversionFragment : Fragment(), FontSizeAware {
         // Initialize RecyclerView for displaying conversion results
         try {
             binding.conversionResultsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-            conversionResultAdapter = ConversionResultAdapter(emptyList())
+            conversionResultAdapter = ConversionResultAdapter(emptyList(), fontSize)
             binding.conversionResultsRecyclerView.adapter = conversionResultAdapter
         } catch (e: Exception) {
             e.printStackTrace() // Log any errors
@@ -119,7 +119,12 @@ class ConversionFragment : Fragment(), FontSizeAware {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 try {
-                    onConvert() // Calling conversion method here
+                    // Check if the input field is empty and enable/disable the copy button accordingly
+                    val isEmpty = s.isNullOrEmpty()
+                    binding.copyButton.isEnabled = !isEmpty
+                    if(!isEmpty){
+                        onConvert()
+                    } // Calling conversion method here
                 } catch (e: Exception) {
                     Toast.makeText(requireContext(), getString(R.string.toast_conversion_error), Toast.LENGTH_SHORT).show() // Notify user of conversion error
                     e.printStackTrace()

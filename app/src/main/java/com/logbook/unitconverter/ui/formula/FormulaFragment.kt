@@ -20,7 +20,7 @@ class FormulaFragment : Fragment(), FontSizeAware {
     private val binding get() = _binding!! // Non-nullable binding reference
     private val viewModel: FormulaViewModel by viewModels() // ViewModel for the fragment
 
-    private var fontSize: Float = 16f // Default font size
+    private var fontSize: Float = 16f// Default font size
     private lateinit var adapter: GroupedFormulaAdapter // Declare the adapter
 
     override fun onCreateView(

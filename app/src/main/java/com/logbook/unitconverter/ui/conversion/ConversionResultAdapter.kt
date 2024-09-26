@@ -12,15 +12,14 @@ import com.logbook.unitconverter.R
  * Adapter for displaying conversion results in a RecyclerView.
  * Each item in the list represents a unit and its corresponding converted value.
  */
-class ConversionResultAdapter(private var results: List<Pair<String, String>>) :
+class ConversionResultAdapter(private var results: List<Pair<String, String>>, private var fontSize: Float) :
     RecyclerView.Adapter<ConversionResultAdapter.ResultViewHolder>() {
 
-    private var fontSize: Float = 16f // Default font size
 
     /**
      * ViewHolder for holding the views of each item in the conversion results.
      */
-    class ResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ResultViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         // TextView for displaying the unit
         val unitTextView: TextView = itemView.findViewById(R.id.unitTextView)
         // TextView for displaying the converted value
