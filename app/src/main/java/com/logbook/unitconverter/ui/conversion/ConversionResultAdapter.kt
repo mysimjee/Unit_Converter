@@ -96,8 +96,6 @@ class ConversionResultAdapter(private var results: List<Pair<String, String>>) :
         try {
             // Convert the map to a list of pairs and update the results
             results = newResults.map { it.toPair() }
-            // Notify the adapter that the data has changed
-            notifyDataSetChanged()
         } catch (e: Exception) {
             e.printStackTrace() // Log any errors during results update
         }

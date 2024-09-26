@@ -2,7 +2,6 @@ package com.logbook.unitconverter.ui.conversion
 
 import android.content.ClipData
 import android.content.ClipboardManager
-import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle

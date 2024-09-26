@@ -3,6 +3,7 @@ package com.logbook.unitconverter.ui.conversion
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import java.util.Locale
 
 /**
  * ViewModel for handling unit conversions.
@@ -93,11 +94,12 @@ class ConversionViewModel : ViewModel() {
             }
 
             // Create a map of converted values
+            val locale: Locale = Locale.US
             val convertedValues = mutableMapOf<String, String>().apply {
-                put("Metre", String.format("%.2f", meters))
-                put("Millimetre", String.format("%.2f", meters * 1000))
-                put("Mile", String.format("%.6f", meters / 1609.34))
-                put("Foot", String.format("%.2f", meters / 0.3048))
+                put("Metre", String.format(locale,"%.2f", meters))
+                put("Millimetre", String.format(locale,"%.2f", meters * 1000))
+                put("Mile", String.format(locale,"%.6f", meters / 1609.34))
+                put("Foot", String.format(locale,"%.2f", meters / 0.3048))
             }
 
             // Update the LiveData with the converted values

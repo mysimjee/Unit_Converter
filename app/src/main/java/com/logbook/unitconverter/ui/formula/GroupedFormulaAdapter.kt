@@ -121,7 +121,6 @@ class GroupedFormulaAdapter(
     fun updateFontSize(newFontSize: Float) {
         try {
             fontSize = newFontSize // Update the font size
-            notifyDataSetChanged()
         } catch (e: Exception) {
             e.printStackTrace() // Log any errors during font size update
         }
