@@ -1,5 +1,6 @@
 package com.logbook.unitconverter.ui.conversion
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -92,10 +93,12 @@ class ConversionResultAdapter(private var results: List<Pair<String, String>>) :
      * Updates the results and notifies the adapter to refresh the displayed data.
      * @param newResults A map of units and their corresponding converted values.
      */
+    @SuppressLint("NotifyDataSetChanged") // to suppress warning about using notifyDataSetChanged()
     fun updateResults(newResults: Map<String, String>) {
         try {
             // Convert the map to a list of pairs and update the results
             results = newResults.map { it.toPair() }
+            notifyDataSetChanged() // to force re-rendering of view-holder when value changed
         } catch (e: Exception) {
             e.printStackTrace() // Log any errors during results update
         }
@@ -105,9 +108,11 @@ class ConversionResultAdapter(private var results: List<Pair<String, String>>) :
      * Sets the font size for the adapter and refreshes the views.
      * @param size The font size to set.
      */
+    @SuppressLint("NotifyDataSetChanged")
     fun setFontSize(size: Float) {
         try {
             fontSize = size
+            notifyDataSetChanged() // to force re-rendering of view-holder
         } catch (e: Exception) {
             e.printStackTrace() // Log any errors when setting font size
         }

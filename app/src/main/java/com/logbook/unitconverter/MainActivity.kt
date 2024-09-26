@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -22,13 +23,36 @@ class MainActivity : AppCompatActivity() {
     }
     private var selectedFontSizeIndex = 1 // Default to Medium
 
+
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            //showing dialog and then closing the application..
+            showExitDialog()
+        }
+    }
+
+
+
     companion object {
         private const val PREFS_DARK_MODE = "DARK_MODE"
         private const val PREFS_FONT_SIZE_INDEX = "FONT_SIZE_INDEX"
     }
 
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        try {
+            applyFontSize()
+        } catch (e: Exception) {
+            e.printStackTrace() // Log the exception
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // adding onBackPressedCallback callback listener.
+        onBackPressedDispatcher.addCallback(this,onBackPressedCallback)
 
         // Load the dark mode preference
         val sharedPreferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
@@ -87,9 +111,35 @@ class MainActivity : AppCompatActivity() {
                 showFontSizeDialog()
                 true
             }
+
+            R.id.action_exit -> {
+                showExitDialog()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+
+    private fun showExitDialog() { // Create exit dialog that will be shown to user when user press back button or exit option in menu
+        try {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.confirm_exit_title)
+                .setMessage(R.string.confirm_exit_message)
+                .setPositiveButton(R.string.button_yes) { _, _ ->
+                    finish() // Close the activity
+                }
+                .setNegativeButton(R.string.button_no) { dialog, _ ->
+                    dialog.dismiss() // Dismiss the dialog
+                }
+                .create()
+                .show()
+        } catch (e: Exception) {
+            e.printStackTrace() // Log the exception
+            Toast.makeText(this, getString(R.string.toast_error_showing_dialog), Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     private fun setDarkMode(isDarkMode: Boolean) {
         AppCompatDelegate.setDefaultNightMode(if (isDarkMode) {

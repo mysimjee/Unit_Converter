@@ -23,13 +23,13 @@
             android:text="@string/default_from_field_value"
             android:hint="@string/hint_enter_value"
             android:inputType="numberDecimal"
-            android:textSize="16sp"
+
             android:gravity="center"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/fromUnitSpinner"
-            app:layout_constraintWidth_percent="0.7" />
+            app:layout_constraintWidth_percent="0.6" />
 
         <Spinner
             android:id="@+id/fromUnitSpinner"
@@ -42,7 +42,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/fromValueField"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintWidth_percent="0.3" />
+            app:layout_constraintWidth_percent="0.4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,11 +65,10 @@
             android:hint="@string/hint_converted_value"
             android:inputType="none"
             android:focusable="false"
-            android:textSize="16sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/toUnitSpinner"
-            app:layout_constraintWidth_percent="0.7" />
+            app:layout_constraintWidth_percent="0.6" />
 
         <Spinner
             android:id="@+id/toUnitSpinner"
@@ -81,7 +80,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/toValueField"
-            app:layout_constraintWidth_percent="0.3" />
+            app:layout_constraintWidth_percent="0.4" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button

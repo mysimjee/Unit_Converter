@@ -13,7 +13,7 @@ class ConversionViewModel : ViewModel() {
 
     // LiveData to hold the input value as a String
     private val _inputValue = MutableLiveData("1")
-    private val _outputValue = MutableLiveData("1")
+    private val _outputValue = MutableLiveData("0.000621371")
 
     // LiveData to hold the selected unit to convert from
     private val _fromUnit = MutableLiveData<String>()
@@ -34,7 +34,7 @@ class ConversionViewModel : ViewModel() {
     init {
         _fromUnit.value = "Metre" // Default from unit
         _toUnit.value = "Mile"   // Default to unit
-        _convertedValue.value = emptyMap() // Initialize converted values
+        convertLength() // Initialize converted values
     }
 
     /**

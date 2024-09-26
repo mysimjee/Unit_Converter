@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceManager
 import com.logbook.unitconverter.R
@@ -53,9 +54,20 @@ class AboutFragment : Fragment(), FontSizeAware {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Set the font size for the UI elements
-        setFontSize(fontSize)
 
+        try {
+            // Set the font size for the UI elements
+            setFontSize(fontSize)
+
+            // Set text & image for UI elements
+            setupAppInfo()
+        } catch (e: Exception) {
+            // Handle any exceptions when setting text or images
+            e.printStackTrace()
+        }
+    }
+
+    private fun setupAppInfo() {
         // Attempt to set the text and images for the UI elements
         try {
             binding.appNameTextView.text = getString(R.string.app_name)
@@ -70,8 +82,13 @@ class AboutFragment : Fragment(), FontSizeAware {
     }
 
     override fun setFontSize(size: Float) {
-        fontSize = size // Update the font size and apply it
-        applyFontSize()
+        try {
+            fontSize = size // Update the font size and apply it
+            applyFontSize()
+        } catch (e: Exception) {
+            // Handle any exceptions when setting font sizes
+            e.printStackTrace()
+        }
     }
 
     private fun applyFontSize() {
@@ -84,6 +101,8 @@ class AboutFragment : Fragment(), FontSizeAware {
         } catch (e: Exception) {
             // Handle any exceptions when applying font sizes
             e.printStackTrace()
+            Toast.makeText(requireContext(), getString(R.string.toast_font_size_failed_to_changed), Toast.LENGTH_SHORT).show() // Notify user of conversion error
+
         }
     }
 

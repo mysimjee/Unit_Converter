@@ -4,10 +4,8 @@ import androidx.lifecycle.ViewModel // Import for ViewModel class
 
 class FormulaViewModel : ViewModel() { // Declaration of FormulaViewModel class extending ViewModel
 
-    /**
-     * Function to get a list of grouped conversion formulas.
-     * @return A list of UnitGroup instances containing conversion formulas.
-     */
+
+    // Function to get a list of grouped conversion formulas.
     fun getGroupedConversionFormulas(): List<UnitGroup> {
         return try {
             listOf( // Return a list of UnitGroup instances

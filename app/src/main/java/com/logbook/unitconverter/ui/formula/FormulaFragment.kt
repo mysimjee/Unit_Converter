@@ -5,6 +5,7 @@ import android.os.Bundle // Import for handling saved instance state
 import android.view.LayoutInflater // Import for inflating layout views
 import android.view.View // Import for View class
 import android.view.ViewGroup // Import for ViewGroup class
+import android.widget.Toast
 import androidx.fragment.app.Fragment // Import for Fragment class
 import androidx.fragment.app.viewModels // Import for viewModels delegate
 import androidx.preference.PreferenceManager
@@ -76,6 +77,8 @@ class FormulaFragment : Fragment(), FontSizeAware {
             adapter.updateFontSize(fontSize) // Update font size in the adapter
         } catch (e: Exception) {
             e.printStackTrace() // Log any errors while updating font size
+            Toast.makeText(requireContext(), getString(R.string.toast_font_size_failed_to_changed), Toast.LENGTH_SHORT).show() // Notify user of conversion error
+
         }
     }
 }

@@ -12,7 +12,10 @@
     <string name="title_conversion">Conversion</string>
     <string name="title_formula">Formula</string>
     <string name="title_about">About</string>
-    <string name="lbl_font_size">Change Font Size</string>
+
+    <string name="menu_change_font_size">Change Font Size</string>
+    <string name="menu_exit">Exit App</string>
+
 
 
     <string name="hint_enter_value">Enter value to convert</string>
@@ -23,6 +26,13 @@
 
     <string name="toast_light_mode">Switched to Light Mode</string>
     <string name="toast_dark_mode">Switched to Dark Mode</string>
+
+    <string name="toast_copied">Converted value copied to clipboard!</string>
+    <string name="toast_copy_failed">Failed to copy to clipboard.</string>
+
+    <string name="toast_font_size_failed_to_changed">Failed to copy to clipboard.</string>
+
+    <string name="toast_conversion_error">Failed to convert due to technical error!.</string>
 
     <string name="menu_switch_to_light_mode">Disable Dark Mode</string>
     <string name="menu_switch_to_dark_mode">Enable Dark Mode</string>
@@ -49,4 +59,13 @@
         <item>Mile</item>
         <item>Foot</item>
     </string-array>
+
+
+    <string name="confirm_exit_title">Exit App</string>
+    <string name="confirm_exit_message">Are you sure you want to exit the app?</string>
+    <string name="button_yes">Yes</string>
+    <string name="button_no">No</string>
+
+    <string name="toast_error_showing_dialog">An error occurred while showing the dialog.</string>
+
 </resources>

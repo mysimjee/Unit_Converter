@@ -1,5 +1,6 @@
 package com.logbook.unitconverter.ui.formula // Package declaration for GroupedFormulaAdapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater // Import for inflating layout views
 import android.view.View
@@ -54,6 +55,7 @@ class GroupedFormulaAdapter(
                         // Add the TextView to the ConstraintLayout
                         formulaTextView.layoutParams = layoutParams
                         binding.formulasContainer.addView(formulaTextView)
+                        binding.unitTextView.textSize = fontSize
 
                     } catch (e: Exception) {
                         e.printStackTrace() // Log any errors while adding formula TextView
@@ -118,9 +120,11 @@ class GroupedFormulaAdapter(
      * Updates the font size for the adapter and refreshes the views.
      * @param newFontSize The new font size to be set.
      */
+    @SuppressLint("NotifyDataSetChanged") // to suppress warning about notifyDataSetChanged
     fun updateFontSize(newFontSize: Float) {
         try {
             fontSize = newFontSize // Update the font size
+            notifyDataSetChanged() // to force re-rendering of view-holder
         } catch (e: Exception) {
             e.printStackTrace() // Log any errors during font size update
         }

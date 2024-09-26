@@ -5,6 +5,8 @@ import android.content.ClipboardManager
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -112,6 +114,22 @@ class ConversionFragment : Fragment(), FontSizeAware {
         // Set listener for input field focus change
         binding.fromValueField.setOnFocusChangeListener { _, _ -> onConvert() }
 
+        binding.fromValueField.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                try {
+                    onConvert() // Calling conversion method here
+                } catch (e: Exception) {
+                    Toast.makeText(requireContext(), getString(R.string.toast_conversion_error), Toast.LENGTH_SHORT).show() // Notify user of conversion error
+                    e.printStackTrace()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
+
         // Spinner selection listeners to trigger conversion
         binding.fromUnitSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
@@ -123,7 +141,13 @@ class ConversionFragment : Fragment(), FontSizeAware {
 
         binding.toUnitSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                onConvert() // Perform conversion when a unit is selected
+                try {
+                    onConvert() // Calling conversion method here
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    Toast.makeText(requireContext(), getString(R.string.toast_conversion_error), Toast.LENGTH_SHORT).show() // Notify user of conversion error
+
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {}
@@ -132,25 +156,25 @@ class ConversionFragment : Fragment(), FontSizeAware {
         // Copy button listener to copy conversion result to clipboard
         binding.copyButton.setOnClickListener {
             try {
-                val clipboard = getSystemService(requireContext(), ClipboardManager::class.java) as ClipboardManager
+                val clipboard = getSystemService(requireContext(), ClipboardManager::class.java) as ClipboardManager // Using clipboard api to copy text
                 val fromValue = binding.fromValueField.text.toString()
                 val fromUnit = binding.fromUnitSpinner.selectedItem.toString()
                 val toValue = binding.toValueField.text.toString()
                 val toUnit = binding.toUnitSpinner.selectedItem.toString()
 
                 // Create the string to copy
-                val resultString = "$fromValue $fromUnit = $toValue $toUnit"
-                val clip: ClipData = ClipData.newPlainText("Conversion Result", resultString)
+                val resultString = "$fromValue $fromUnit = $toValue $toUnit" // Generating text that is to be copied
+                val clip: ClipData = ClipData.newPlainText("Conversion Result", resultString) // Putting text in clipboard
 
                 clipboard.setPrimaryClip(clip) // Set the string to the clipboard
 
                 // Show a toast message to inform the user
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                    Toast.makeText(requireContext(), "Converted value copied to clipboard!", Toast.LENGTH_SHORT).show()
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) { // Checking Android Version
+                    Toast.makeText(requireContext(), getString(R.string.toast_copied), Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                Toast.makeText(requireContext(), "Failed to copy to clipboard.", Toast.LENGTH_SHORT).show() // Notify user of failure
+                Toast.makeText(requireContext(), getString(R.string.toast_copy_failed), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -168,7 +192,7 @@ class ConversionFragment : Fragment(), FontSizeAware {
             viewModel.convertLength() // Perform conversion in ViewModel
         } catch (e: Exception) {
             e.printStackTrace()
-            Toast.makeText(requireContext(), "Conversion error.", Toast.LENGTH_SHORT).show() // Notify user of conversion error
+            Toast.makeText(requireContext(), getString(R.string.toast_conversion_error), Toast.LENGTH_SHORT).show() // Notify user of conversion error
         }
     }
 
@@ -196,6 +220,8 @@ class ConversionFragment : Fragment(), FontSizeAware {
             conversionResultAdapter.setFontSize(fontSize)
         } catch (e: Exception) {
             e.printStackTrace() // Log any errors
+            Toast.makeText(requireContext(), getString(R.string.toast_font_size_failed_to_changed), Toast.LENGTH_SHORT).show() // Notify user of conversion error
+
         }
     }
 
