@@ -19,7 +19,7 @@
 
 
     <string name="hint_enter_value">Enter value to convert</string>
-    <string name="hint_converted_value">Converted value will appear here</string>
+    <string name="hint_converted_value">Result value will appear here</string>
 
     <string name="button_copy">Copy Result</string>
 
