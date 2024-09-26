@@ -1,0 +1,15 @@
+<!-- res/menu/menu_main.xml -->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_dark_mode"
+        android:orderInCategory="100"
+        android:title="@string/menu_switch_to_dark_mode"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_font_size"
+        android:title="@string/lbl_font_size"
+        android:orderInCategory="101"
+        app:showAsAction="never" />
+</menu>

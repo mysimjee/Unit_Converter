@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_conversion"
+        android:icon="@drawable/baseline_conversion_24"
+        android:title="@string/title_conversion" />
+
+    <item
+        android:id="@+id/navigation_formula"
+        android:icon="@drawable/baseline_formula_24"
+        android:title="@string/title_formula" />
+
+    <item
+        android:id="@+id/navigation_about"
+        android:icon="@drawable/baseline_about_24"
+        android:title="@string/title_about" />
+
+</menu>
