@@ -12,8 +12,8 @@ import java.util.Locale
 class ConversionViewModel : ViewModel() {
 
     // LiveData to hold the input value as a String
-    private val _inputValue = MutableLiveData<String>("1")
-    private val _outputValue = MutableLiveData<String>("1")
+    private val _inputValue = MutableLiveData("1")
+    private val _outputValue = MutableLiveData("1")
 
     // LiveData to hold the selected unit to convert from
     private val _fromUnit = MutableLiveData<String>()
