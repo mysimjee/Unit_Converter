@@ -70,6 +70,7 @@ class ConversionFragment : Fragment(), FontSizeAware {
         setupRecyclerView()
         observeConvertedValues()
         setupInputListeners()
+        setFontSize(fontSize)
     }
 
     private fun setupSpinners(fontSize: Float) {
